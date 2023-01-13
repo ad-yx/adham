@@ -1,0 +1,19 @@
+# Importation des bibliothÃ¨ques
+from microbit import *
+import utime
+#DÃ©charge du condensateur
+pin0.write_analog(0)
+sleep(8000)
+
+#DÃ©finition des broches et grandeur de test pour dÃ©clenchement chronomÃ¨tre
+pin1.read_analog()
+pin0.write_analog(1023)
+test = True
+
+while pin1.read_analog() < 1023:
+    #Test indiquant le dÃ©but de la charge du condensateur
+    if pin1.read_analog() > 15 and test == True :
+        delay = utime.ticks_ms() # La commande ultime.tick_ms() renvoie la date en
+                                # de l'horloge interne du microcrocontroleur en ms
+        test = False
+print("tau = ",utime.ticks_ms()-delay, " ms") # Affichage durÃ©e mesurÃ©
